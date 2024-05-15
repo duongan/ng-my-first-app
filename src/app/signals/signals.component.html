@@ -1,0 +1,11 @@
+<div class="container">
+    <div>Counter: {{ counter() }}</div>
+    <div>Double Counter: {{ doubleCounter() }}</div>
+    <div>
+        <button type="button" class="btn btn-primary" (click)="decrement()">Decrement</button>
+        <button type="button" class="btn btn-primary" (click)="increment()">Increment</button>
+    </div>
+
+    <h2>ACTIONS</h2>
+    <div *ngFor="let action of actions()">{{ action }}</div>
+</div>
