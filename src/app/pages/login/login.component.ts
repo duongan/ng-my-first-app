@@ -1,8 +1,11 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Auth, User, user, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { Subscription } from 'rxjs';
-
+import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { signIn } from '@store/actions';
+import { AuthState } from '@store/auth.reducer';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -10,17 +13,18 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
+
 export class LoginComponent {
-  private auth: Auth = inject(Auth);
-  user$ = user(this.auth);
+  private firebaseAuth: Auth = inject(Auth);
 
   email = new FormControl('');
   password = new FormControl('');
 
-  constructor() {}
+  constructor(private store: Store<AuthState>, private router: Router) {
+    
+  }
 
   onSubmit() {
-    console.log('Submitted!!!', this.email.value, this.password.value);
     const { value: email } = this.email || {};
     const { value: password } = this.password || {};
 
@@ -28,9 +32,12 @@ export class LoginComponent {
       return;
     }
 
-    signInWithEmailAndPassword(this.auth, email, password)
+    signInWithEmailAndPassword(this.firebaseAuth, email, password)
       .then(userCredential => {
         console.log('user logged in', userCredential);
+        const { user } = userCredential;
+        this.store.dispatch(signIn({ user }));
+        this.router.navigate(['/']);
       })
       .catch(error => {
         console.log('user logged in fail', error);
