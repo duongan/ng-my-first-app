@@ -9,18 +9,18 @@ export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
     },
     {
         path: 'signals',
-        component: SignalsComponent
+        component: SignalsComponent,
     },
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
     },
     {
         path: '**',
-        component: NotFoundComponent
-    }
+        component: NotFoundComponent,
+    },
 ];

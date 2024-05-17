@@ -2,13 +2,26 @@
     <h1 class="display-5 text-center mt-5 mb-3">Login</h1>
     <form>
         <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input [formControl]="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <label for="email" class="form-label">Email</label>
+            <input
+                [formControl]="email"
+                type="email"
+                class="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+            />
         </div>
         <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input [formControl]="password" type="password" class="form-control" id="password">
+            <label for="password" class="form-label">Password</label>
+            <input
+                [formControl]="password"
+                type="password"
+                class="form-control"
+                id="password"
+            />
         </div>
-        <button (click)="onSubmit()" type="button" class="btn btn-primary">Submit</button>
-      </form>
+        <button (click)="onSubmit()" type="button" class="btn btn-primary">
+            Submit
+        </button>
+    </form>
 </div>

@@ -7,7 +7,4 @@ export interface AppState {
 
 export const selectAuth = (state: AppState) => state.auth;
 
-export const loggedInUser = createSelector(
-    selectAuth,
-    (state) => state.user
-);
+export const loggedInUser = createSelector(selectAuth, (state) => state.user);
